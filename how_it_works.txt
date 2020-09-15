@@ -1,0 +1,1 @@
+entender como navegar documentacion oficial y no oficial de rails (creen un texto donde me expliquen como funciona ActiveRecord::Base#find_by
