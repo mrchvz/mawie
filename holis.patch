@@ -1,0 +1,104 @@
+diff --git a/app/models/person.rb b/app/models/person.rb
+index 47d1b63..9dee255 100644
+--- a/app/models/person.rb
++++ b/app/models/person.rb
+@@ -1,5 +1,6 @@
+ class Person < ApplicationRecord
+   self.table_name = "people"
++  # children pueden ser father o mother, como le harias? Hint: Scope
+   has_many :children, class_name: "Children", foreign_key: "father_id"
+   belongs_to :father, class_name: "Father", optional: true
+   belongs_to :mother, class_name: "Mother", optional: true
+diff --git a/db/seeds.rb b/db/seeds.rb
+index 6398273..26773bd 100644
+--- a/db/seeds.rb
++++ b/db/seeds.rb
+@@ -1,9 +1,79 @@
+-Person.create(name: "Nicolas I")
+-Person.create(name: "Celia")
+-Person.create(name: "Nicolas II", father_id: 1, mother_id: 2)
+-Person.create(name: "Lups")
+-Person.create(name: "Mawie", father_id: 3, mother_id: 4)
+-Person.create(name: "Hector", father_id: 3, mother_id: 4)
+-Person.create(name: "Cesar", father_id: 3, mother_id: 4)
+-Person.create(name: "Sofia", father_id: 6)
+-Person.create(name: "Percy", mother_id: 5)
++# NOTE: Como le harias para procesar esta estructura
++family_tree = [
++  {
++    identifier: :nicolas_1,
++    name: 'Nicolas I',
++    father_identifier: nil,
++    mother_identifier: nil
++  },
++  {
++    identifier: :celia
++    name: 'Celia',
++    father_identifier: nil,
++    mother_identifier: nil
++  },
++  {
++    identifier: :nicolas_2,
++    name: 'Nicolas I',
++    father_identifier: :nicolas_1,
++    mother_identifier: :celia
++  },
++  {
++    identifier: :lups,
++    name: 'Lups',
++    father_identifier: nil,
++    mother_identifier: nil
++  },
++  {
++    identifier: :mawie,
++    name: 'Mawie',
++    father_identifier: :nicolas_2,
++    mother_identifier: :lups
++  },
++  {
++    identifier: :hector,
++    name: 'Hector',
++    father_identifier: :nicolas_2,
++    mother_identifier: :lups
++  },
++  {
++    identifier: :cesar,
++    name: 'Cesar',
++    father_identifier: :nicolas_2,
++    mother_identifier: :lups
++  },
++  {
++    identifier: :sofia,
++    name: 'Sofia',
++    father_identifier: :hector
++    mother_identifier: nil
++  },
++  {
++    identifier: :percy,
++    name: 'Percy',
++    father_identifier: nil,
++    mother_identifier: :mawie
++  }
++]
++
++# SUGERENCIA: Para declarar relaciones es mejor usar instancias de modelos
++# en lugar de usar ids
++# en lugar de father_id/mother_id, usar father y mother
++# e.g.
++# nicolas   = Person.create!(name: 'Nicolas')
++# celia     = Person.create!(name: "Celia")
++# nicolas_2 = Person.create!(name: 'Nicolas II', father: nicolas, mother: celia)
++#
++# Person.create(name: "Nicolas I")
++# Person.create(name: "Celia")
++# Person.create(name: "Nicolas II", father_id: 1, mother_id: 2)
++# Person.create(name: "Lups")
++# Person.create(name: "Mawie", father_id: 3, mother_id: 4)
++# Person.create(name: "Hector", father_id: 3, mother_id: 4)
++# Person.create(name: "Cesar", father_id: 3, mother_id: 4)
++# Person.create(name: "Sofia", father_id: 6)
++# Person.create(name: "Percy", mother_id: 5)
++
++
++# DUDA: Por que agrege un identifier
++# DUDA: Cual es la diferencia entre `ActiveRecord::Base#create` y `ActiveRecord::Base#create!`
