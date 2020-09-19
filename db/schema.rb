@@ -17,8 +17,6 @@ ActiveRecord::Schema.define(version: 2020_08_25_194956) do
     t.string "identifier"
     t.integer "father_id"
     t.integer "mother_id"
-    t.string "father_identifier"
-    t.string "mother_identifier"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["father_id"], name: "index_people_on_father_id"

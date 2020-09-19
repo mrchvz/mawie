@@ -60,7 +60,6 @@ family_tree.each do |attribute_set|
   person = Person.create!(attribute_set)
 end
 
-
 # SUGERENCIA: Para declarar relaciones es mejor usar instancias de modelos
 # en lugar de usar ids
 # en lugar de father_id/mother_id, usar father y mother
