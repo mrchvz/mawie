@@ -9,13 +9,9 @@
       <tbody>
         <% @people.each do |person| %>
           <tr>
-            <td><%= person.id%></td>
-            <td><%= person.name%></td>
-            <td><%= person.identifier%></td>
-            <td><%= person.father_id%></td>
-            <td><%= person.mother_id%></td>
-            <td><%= person.created_at%></td>
-            <td><%= person.updated_at%></td>
+            <% person.attributes.each do |k,v| %>
+            <td><%= v %></td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
