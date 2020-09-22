@@ -9,4 +9,5 @@ class Person < ApplicationRecord
 
   # attributes
   validates :name, presence: true
+  validates :identifier, presence: true
 end

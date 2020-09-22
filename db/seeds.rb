@@ -1,5 +1,5 @@
 # NOTE: Como le harias para procesar esta estructura
-family_tree = [
+@family_tree = [
   {
     identifier: :nicolas_1,
     name: 'Nicolas I',
@@ -14,7 +14,7 @@ family_tree = [
   },
   {
     identifier: :nicolas_2,
-    name: 'Nicolas I',
+    name: 'Nicolas II',
     father_identifier: :nicolas_1,
     mother_identifier: :celia
   },
@@ -57,7 +57,18 @@ family_tree = [
 ]
 
 family_tree.each do |attribute_set|
-  person = Person.create!(attribute_set)
+  person = Person.new
+  person.identifier = attribute_set.fetch(:identifier)
+  person.name = attribute_set.fetch(:name)
+  person.father_id = Person.find_by({
+    :father_id => :father_identifier
+    })
+  person.father_id = attribute_set.fetch(:father_identifier)
+  person.mother_id = Person.find_by({
+    :mother_id => :mother_identifier
+    })
+  person.mother_id = attribute_set.fetch(:father_identifier)
+  person.save!
 end
 
 # SUGERENCIA: Para declarar relaciones es mejor usar instancias de modelos

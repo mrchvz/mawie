@@ -1,6 +1,23 @@
-<h1>
-  We are the people.
-</h1>
-<% @people.each do |person| %>
-  <%= person.name %>
-<% end %>
+<h1>The Gatopan Family (circa 103 b.c.)</h1>
+<div>
+    <table>
+      <thead>
+        <% Person.column_names.each do |header| %>
+          <th><%= header %></th>
+        <% end %>
+      </thead>
+      <tbody>
+        <% @people.each do |person| %>
+          <tr>
+            <td><%= person.id%></td>
+            <td><%= person.name%></td>
+            <td><%= person.identifier%></td>
+            <td><%= person.father_id%></td>
+            <td><%= person.mother_id%></td>
+            <td><%= person.created_at%></td>
+            <td><%= person.updated_at%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+</div>
