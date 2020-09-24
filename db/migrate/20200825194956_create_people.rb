@@ -9,10 +9,10 @@ class CreatePeople < ActiveRecord::Migration[6.0]
       t.string :identifier
 
       # FATHER_ID | DATA_TYPE: INTEGER | INDEX = TRUE
-      t.string :father_id, index:true
+      t.references :father
 
       # MOTHER_ID | DATA_TYPE: INTEGER | INDEX = TRUE
-      t.string :mother_id, index:true
+      t.references :mother
 
       #CREATED_AT | DATA_TYPE: DATETIME
       #UPDATED_AT | DATA_TYPE: DATETIME

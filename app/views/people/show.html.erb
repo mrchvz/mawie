@@ -1,0 +1,19 @@
+<h1> <%= @current_person.name %> </h1>
+<table>
+  <thead>
+    <% Person.column_names.each do |header| %>
+      <th><%= header %></th>
+    <% end %>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @current_person.id %></td>
+      <td><%= @current_person.name %></td>
+      <td><%= @current_person.identifier %></td>
+      <td><%= @current_person.father_id %></td>
+      <td><%= @current_person.mother_id %></td>
+      <td><%= @current_person.created_at %></td>
+      <td><%= @current_person.updated_at %></td>
+    </tr>
+  </tbody>
+</table>

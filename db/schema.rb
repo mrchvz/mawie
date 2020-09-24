@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(version: 2020_08_25_194956) do
   create_table "people", force: :cascade do |t|
     t.string "name"
     t.string "identifier"
-    t.string "father_id"
-    t.string "mother_id"
+    t.integer "father_id"
+    t.integer "mother_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["father_id"], name: "index_people_on_father_id"

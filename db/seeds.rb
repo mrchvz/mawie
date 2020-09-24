@@ -1,5 +1,5 @@
 # NOTE: Como le harias para procesar esta estructura
-@family_tree = [
+family_tree = [
   {
     identifier: :nicolas_1,
     name: 'Nicolas I',
@@ -60,14 +60,17 @@ family_tree.each do |attribute_set|
   person = Person.new
   person.identifier = attribute_set.fetch(:identifier)
   person.name = attribute_set.fetch(:name)
-  person.father_id = Person.find_by({
-    :father_id => :father_identifier
-    })
-  person.father_id = attribute_set.fetch(:father_identifier)
-  person.mother_id = Person.find_by({
-    :mother_id => :mother_identifier
-    })
-  person.mother_id = attribute_set.fetch(:father_identifier)
+
+  if father_identifier = attribute_set.fetch(:father_identifier)
+    father = Person.find_by!(identifier: father_identifier)
+    person.father = father
+  end
+
+  if mother_identifier = attribute_set.fetch(:mother_identifier)
+    mother = Person.find_by!(identifier: mother_identifier)
+    person.mother = mother
+  end
+
   person.save!
 end
 
