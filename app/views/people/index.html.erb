@@ -13,14 +13,14 @@
         <td><%= link_to person.identifier, person_path(person.identifier) %></td>
         <td>
           <% unless person.father_id == nil %>
-          <% father_identifier = Person.find_by!(id: person.father_id).identifier %>
-          <%= link_to person.father_id, person_path(father_identifier) %>
+            <% father_identifier = Person.find_by!(id: person.father_id).identifier %>
+            <%= link_to person.father_id, person_path(father_identifier) %>
           <% end %>
         </td>
         <td>
           <% unless person.mother_id == nil %>
-          <% mother_identifier = Person.find_by!(id: person.mother_id).identifier %>
-          <%= link_to person.mother_id, person_path(mother_identifier) %>
+            <% mother_identifier = Person.find_by!(id: person.mother_id).identifier %>
+            <%= link_to person.mother_id, person_path(mother_identifier) %>
           <% end %>
         </td>
         <td><%= person.created_at %></td>

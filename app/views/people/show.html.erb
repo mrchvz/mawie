@@ -10,8 +10,18 @@
       <td><%= @current_person.id %></td>
       <td><%= @current_person.name %></td>
       <td><%= @current_person.identifier %></td>
-      <td><%= @current_person.father_id %></td>
-      <td><%= @current_person.mother_id %></td>
+      <td>
+        <% unless @current_person.father_id == nil %>
+          <% father_identifier = Person.find_by!(id: @current_person.father_id).identifier %>
+          <%= link_to @current_person.father_id, person_path(father_identifier) %>
+        <% end %>
+      </td>
+      <td>
+        <% unless @current_person.mother_id == nil %>
+          <% mother_identifier = Person.find_by!(id: @current_person.mother_id).identifier %>
+          <%= link_to @current_person.mother_id, person_path(mother_identifier) %>
+        <% end %>
+      </td>
       <td><%= @current_person.created_at %></td>
       <td><%= @current_person.updated_at %></td>
     </tr>
