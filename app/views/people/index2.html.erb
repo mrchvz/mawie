@@ -12,19 +12,17 @@
         <td><%= person.name %></td>
         <td><%= link_to person.identifier, person_path(person.identifier) %></td>
         <td>
-          <% unless person.father_id == nil %>
-            <% father_identifier = Person.find_by!(id: person.father_id).identifier %>
-            <%= link_to person.father_id, person_path(father_identifier) %>
+          <% if person.father %>
+            <%= link_to person.father.name, person_path(person.father.identifier) %>
           <% end %>
         </td>
         <td>
-          <% unless person.mother_id == nil %>
-            <% mother_identifier = Person.find_by!(id: person.mother_id).identifier %>
-            <%= link_to person.mother_id, person_path(mother_identifier) %>
+          <% if person.mother %>
+            <%= link_to person.mother.name, person_path(person.mother.identifier) %>
           <% end %>
         </td>
-        <td><%= person.created_at %></td>
-        <td><%= person.updated_at %></td>
+        <td><%= person.created_at.to_formatted_s(:long) %></td>
+        <td><%= person.updated_at.to_formatted_s(:long) %></td>
       </tr>
     <% end %>
   </tbody>

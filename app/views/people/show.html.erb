@@ -1,4 +1,4 @@
-<h1><%= @current_person.name %></h1>
+<h1><%= @person.name %></h1>
 <table>
   <thead>
     <% Person.column_names.each do |header| %>
@@ -7,23 +7,21 @@
   </thead>
   <tbody>
     <tr>
-      <td><%= @current_person.id %></td>
-      <td><%= @current_person.name %></td>
-      <td><%= @current_person.identifier %></td>
+      <td><%= @person.id %></td>
+      <td><%= @person.name %></td>
+      <td><%= @person.identifier %></td>
       <td>
-        <% unless @current_person.father_id == nil %>
-          <% father_identifier = Person.find_by!(id: @current_person.father_id).identifier %>
-          <%= link_to @current_person.father_id, person_path(father_identifier) %>
+        <% if @person.father %>
+          <%= link_to person.father.name, person_path(person.father.identifier) %>
         <% end %>
       </td>
       <td>
-        <% unless @current_person.mother_id == nil %>
-          <% mother_identifier = Person.find_by!(id: @current_person.mother_id).identifier %>
-          <%= link_to @current_person.mother_id, person_path(mother_identifier) %>
+        <% if @person.mother %>
+          <%= link_to person.mother.name, person_path(person.mother.identifier) %>
         <% end %>
       </td>
-      <td><%= @current_person.created_at %></td>
-      <td><%= @current_person.updated_at %></td>
+      <td><%= @person.created_at %></td>
+      <td><%= @person.updated_at %></td>
     </tr>
   </tbody>
 </table>

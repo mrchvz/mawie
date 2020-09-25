@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # get "/people", to: "people#index"
-  # get "/people/:identifier", to: "people#show"
+  root to: 'people#index'
   resources :people, { only: [:index, :show], param: :identifier }
 end

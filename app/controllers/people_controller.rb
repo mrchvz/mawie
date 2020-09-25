@@ -5,6 +5,7 @@ class PeopleController < ApplicationController
   end
 
   def show
-    @current_person = Person.find_by(identifier: params.fetch(:identifier))
+    @person = Person.find_by(identifier: params.fetch(:identifier))
+    render :show
   end
 end
